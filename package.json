@@ -1,0 +1,25 @@
+{
+  "name": "want-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0",
+    "vue-tsc": "^0.38.4",
+    "postcss": "^8.4.14",
+    "postcss-preset-env": "^7.7.2",
+    "sass": "^1.26.10",
+    "vite-plugin-libcss": "^1.0.5"
+  }
+}
