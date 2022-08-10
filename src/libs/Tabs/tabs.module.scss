@@ -10,9 +10,10 @@
 
             .label {
                 font-size: 14px;
-
-                &.active {
-                    color: $primary;
+                &:not(.label-disabled) {
+                    &.active {
+                        color: $primary;
+                    }
                 }
 
                 &.label-disabled {

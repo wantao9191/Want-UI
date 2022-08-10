@@ -7,10 +7,9 @@ export const Tabs = defineComponent({
     setup(props, { slots, emit }) {
         const labelWrap = ref('')
         const activeStyle = computed(() => {
-            const index = slots.default?.().findIndex(s => {
-                return s.props?.name === props.value
-            })
+            const index = slots.default?.().findIndex(s => s.props?.name === props.value)
             const activeNode = labelWrap.value && labelWrap.value.querySelectorAll('.label')[index]
+            if(String(activeNode.className).includes('label-disabled') )return {height:'0px'}
             const { left, width } = activeNode && activeNode.getBoundingClientRect()
             return { width: width + 'px', left: left + 'px' }
         })
@@ -27,7 +26,7 @@ export const Tabs = defineComponent({
                             return <div class={t['label-wrap']} onClick={() => tabClick(l.props)} >
                                 <div class={[
                                     l.props.name === props.value ? [t.active, 'active'] : '',
-                                    l.props.disabled ? t['label-disabled'] : '',
+                                    l.props.disabled ? [t['label-disabled'],'label-disabled'] : '',
                                     t['label'],
                                     'label']} >{l.children.label?.()??l.props.label}</div>
                             </div>
