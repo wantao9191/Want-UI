@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import './style.scss'
 import { App } from './App'
-
-createApp(App).mount('#app')
+import install from './libs'
+const app = createApp(App)
+app.use(install)
+app.mount('#app')

@@ -1,0 +1,136 @@
+.want-button {
+    display: inline-flex;
+    border-radius: $radius;
+    color: #fff;
+    cursor: pointer;
+
+    &.round-button {
+        border-radius: 24px;
+    }
+
+    &.disabled-button,
+    &.loading-button {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+
+    &.block-button {
+        display: block;
+        text-align: center;
+    }
+
+    &.want-default-button {
+        border: 1px solid #ddd;
+        color: #333;
+
+        &.fill-none {
+            border: none;
+        }
+        >.loadingIndicator {
+            border-color: #666 #666 #666 transparent;
+        }
+    }
+
+    &.want-primary-button {
+        background-color: $primary;
+
+        &.fill-outline {
+            background: none;
+            border: 1px solid $primary;
+            color: $primary;
+        }
+
+        &.fill-none {
+            background: none;
+            color: $primary;
+        }
+    }
+
+    &.want-success-button {
+        background-color: $success;
+
+        &.fill-outline {
+            background: none;
+            border: 1px solid $success;
+            color: $success;
+        }
+
+        &.fill-none {
+            background: none;
+            color: $success;
+        }
+    }
+
+    &.want-warning-button {
+        background-color: $warning;
+
+        &.fill-outline {
+            background: none;
+            border: 1px solid $warning;
+            color: $warning;
+        }
+
+        &.fill-none {
+            background: none;
+            color: $warning;
+        }
+    }
+
+    &.want-danger-button {
+        background-color: $danger;
+
+        &.fill-outline {
+            background: none;
+            border: 1px solid $danger;
+            color: $danger;
+        }
+
+        &.fill-none {
+            background: none;
+            color: $danger;
+        }
+    }
+
+    &.mini {
+        padding: $mini;
+        font-size: $minifont;
+    }
+
+    &.middle {
+        padding: $middle;
+        font-size: $middlefont;
+    }
+
+    &.large {
+        padding: $large;
+    }
+
+    >.loadingIndicator {
+        width: 14px;
+        height: 14px;
+        display: none;
+        margin-right: 4px;
+        border-radius: 8px;
+        border-color: $primary $primary $primary transparent;
+        border-style: solid;
+        border-width: 2px;
+        animation: spin 1s infinite linear;
+        border-color: #fff #fff #fff transparent;
+    }
+
+    &.loading-button {
+        >.loadingIndicator {
+            display: inline-block;
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
