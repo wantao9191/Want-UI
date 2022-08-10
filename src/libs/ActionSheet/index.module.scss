@@ -1,0 +1,42 @@
+.sheetWrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .45);
+
+    >.sheetContent {
+        background: #fff;
+        border-radius: 12px 12px 0 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        >header {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        >main {
+            >ul {
+                text-align: center;
+
+                >li {
+                    padding: 12px;
+
+                    &:last-child {
+                        margin-bottom: 12px;
+                    }
+                }
+            }
+            >.noData {
+                text-align: center;
+                padding: 24px;
+                color: #666;
+                font-size: 14px;
+            }
+        }
+    }
+}
