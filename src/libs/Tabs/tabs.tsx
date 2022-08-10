@@ -1,4 +1,4 @@
-import { computed, defineComponent, provide, ref } from 'vue'
+import { computed, defineComponent, provide, ref, VNode } from 'vue'
 import t from './tabs.module.scss'
 export const Tabs = defineComponent({
     props: {
@@ -7,14 +7,15 @@ export const Tabs = defineComponent({
     setup(props, { slots, emit }) {
         const labelWrap = ref('')
         const activeStyle = computed(() => {
-            const index = slots.default?.().findIndex(s => s.props?.name === props.value)
+            const defaults: any = slots.default?.()
+            const index = defaults.findIndex((s: VNode) => s.props?.name === props.value)
             const activeNode = labelWrap.value && labelWrap.value.querySelectorAll('.label')[index]
-            if(String(activeNode.className).includes('label-disabled') )return {height:'0px'}
+            if (defaults[index].props.disabled) return { height: '0px' }
             const { left, width } = activeNode && activeNode.getBoundingClientRect()
             return { width: width + 'px', left: left + 'px' }
         })
         const tabClick = (prop: any) => {
-            if(prop.disabled)return
+            if (prop.disabled) return
             emit('update:value', prop.name)
         }
         provide('value', computed(() => props.value))
@@ -26,9 +27,9 @@ export const Tabs = defineComponent({
                             return <div class={t['label-wrap']} onClick={() => tabClick(l.props)} >
                                 <div class={[
                                     l.props.name === props.value ? [t.active, 'active'] : '',
-                                    l.props.disabled ? [t['label-disabled'],'label-disabled'] : '',
+                                    l.props.disabled ? t['label-disabled'] : '',
                                     t['label'],
-                                    'label']} >{l.children.label?.()??l.props.label}</div>
+                                    'label']} >{l.children.label?.() ?? l.props.label}</div>
                             </div>
                         })}
                         <span class={t['active-line']} style={activeStyle.value}></span>
