@@ -1,3 +1,33 @@
 .want-noticebar{
-    
+    padding: $middle;
+    display: flex;
+    justify-content: space-between;
+    .want-noticebar-left {
+        flex-grow: 1;
+    }
+    &.want-noticebar-info {
+        background: $lightprimary;
+        color: $primary;
+    }
+    &.want-noticebar-alert {
+        background: $lightwarning;
+        color: $warning;
+    }
+    &.want-noticebar-error {
+        background: $danger;
+        color: #fff;
+    }
+    &.want-noticebar-default {
+        background: $lightdefault;
+        color: #fff;
+    }
+    .notice-close {
+        font-size: 16px;
+        vertical-align: middle;
+    }
+    .prefix{
+        font-size: 18px;
+        vertical-align: middle;
+        margin-right: 4px;
+    }
 }
