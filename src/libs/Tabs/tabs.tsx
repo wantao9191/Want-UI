@@ -2,7 +2,8 @@ import { computed, defineComponent, provide, ref, VNode } from 'vue'
 import t from './tabs.module.scss'
 export const Tabs = defineComponent({
     props: {
-        value: { type: [String, Number] }
+        value: { type: [String, Number] },
+        beforeClose: { type: Function }
     },
     setup(props, { slots, emit }) {
         const labelWrap = ref('')
@@ -14,10 +15,15 @@ export const Tabs = defineComponent({
             const { left, width } = activeNode && activeNode.getBoundingClientRect()
             return { width: width + 'px', left: left + 'px' }
         })
+        const done = (prop: any) => {
+            emit('update:value', prop.name)
+            emit('tab-click',prop)
+        }
         const tabClick = (prop: any) => {
             if (prop.disabled) return
-            emit('update:value', prop.name)
+            props.beforeClose ? props.beforeClose(()=>done(prop)) :done(prop)
         }
+
         provide('value', computed(() => props.value))
         return () => (
             <div class={t['want-tabs']}>
@@ -26,7 +32,7 @@ export const Tabs = defineComponent({
                         {slots.default?.().map((l: any) => {
                             return <div class={t['label-wrap']} onClick={() => tabClick(l.props)} >
                                 <div class={[
-                                    l.props.name === props.value ? [t.active, 'active'] : '',
+                                    l.props.name === props.value ? t.active : '',
                                     l.props.disabled ? t['label-disabled'] : '',
                                     t['label'],
                                     'label']} >{l.children.label?.() ?? l.props.label}</div>
