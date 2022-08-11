@@ -20,36 +20,39 @@ const createDialog = ({ ...args }: prop) => {
     })
     return { dom, app }
 }
+const initDialog = ({ ...args }: prop,type:string='confirm')=>{
+    return new Promise((resolve: any, reject: any) => {
+        const confirm = (instance: any) => {
+            if (args.beforeClose) {
+                args.beforeClose('confirm', instance, remove)
+                return
+            }
+            remove()
+            resolve()
+        }
+        const cancel = (instance: any, action: string = 'cancel') => {
+            if (args.beforeClose) {
+                args.beforeClose(action, instance, remove)
+                return
+            }
+            remove()
+            reject()
+        }
+        const { dom, app } = createDialog({ ...args, showCancel:type === 'confirm', confirm, cancel })
+        const instance = app()
+        instance.mount(dom)
+        document.body.append(dom)
+        const remove = () => {
+            instance.unmount()
+            dom.remove()
+        }
+    })
+}
 export const dialog = {
     confirm: ({ ...args }: prop) => {
-        return new Promise((resolve: any, reject: any) => {
-            const confirm = (instance: any) => {
-                if (args.beforeClose) {
-                    args.beforeClose('confirm', instance, remove)
-                    return
-                }
-                remove()
-                resolve()
-            }
-            const cancel = (instance: any, action: string = 'cancel') => {
-                if (args.beforeClose) {
-                    args.beforeClose(action, instance, remove)
-                    return
-                }
-                remove()
-                reject()
-            }
-            const { dom, app } = createDialog({ ...args, showCancel: true, confirm, cancel })
-            const instance = app()
-            instance.mount(dom)
-            document.body.append(dom)
-            const remove = () => {
-                instance.unmount()
-                dom.remove()
-            }
-        })
+        return initDialog(args)
     },
-    alert: () => {
-
-    }
+    alert: ({ ...args }: prop) => {
+        return initDialog(args,'alert')
+    },
 }

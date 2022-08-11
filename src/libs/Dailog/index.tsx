@@ -29,7 +29,7 @@ export const Dialog = defineComponent({
         return () => (
             <div class={t['want-dialog']} onClick={close}>
                 <div class={t['want-dialog-wrap']} onClick={withModifiers(()=>{},['stop'])}>
-                    <main>{props.content}</main>
+                    <main v-html={props.content}></main>
                     <footer>
                         <want-button fill='none'
                             class={t['want-dialog-button']}
