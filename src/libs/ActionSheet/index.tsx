@@ -1,37 +1,47 @@
-import { defineComponent, h } from 'vue'
-import s from './index.module.scss'
-export const SheetAction = defineComponent({
+import { computed, defineComponent, ref } from 'vue'
+import t from './index.module.scss'
+export const ActionSheet = defineComponent({
     props: {
-        title: { type: String, default: '' },
         actions: { type: Array, default: [] },
-        value: { type: [String, Number], default: '' },
-        valueKey: { type: String, default: '' },
-        visible: { type: Boolean, default: false }
+        propOptions: { type: Object, default: { label: 'label', value: 'value' } },
+        cancelText: { type: String, default: '取消' },
+        showCancel: { type: Boolean, default: true },
+        visible: Boolean,
+        title: String,
+        beforeClose: Function
     },
-    setup(props, context) {
-        const close = (e?: any) => {
-            e && e.stopPropagation()
-            context.emit('update:visible', false)
+    emits: ['action', 'update:visible', 'close'],
+    setup(props, { slots, emit }) {
+        const close = () => {
+            emit('update:visible', false)
+            emit('close')
         }
-        const select = (item) => {
-            context.emit('update:value', item[props.valueKey] || item['name'])
-            context.emit('select', item[props.valueKey] || item['name'], item)
+        const onClick = ((prop: any) => {
+            if (prop.disabled) return
+            if (props.beforeClose) {
+                props.beforeClose(prop, close)
+                return
+            }
+            emit('action', prop)
             close()
-        }
+        })
         return () => (
-            <div class={s.sheetWrap} onClick={close} v-show={props.visible}>
-                <div class={s.sheetContent} onClick={$event => { $event.stopPropagation() }}>
-                    <header>{props.title}</header>
+            <>{props.visible ? <div class={t['want-action-sheet']}>
+                <div class={[t['want-sheet-wrap'], t.enter]}>
+                    <header class={slots.title ? t.header : ''}>{slots.title?.() ?? <div class={t.header}>{props.title}</div>}</header>
                     <main>
-                        <ul>
-                            {props.actions.map(a => {
-                                return (<li onClick={select.bind(null, a)}>{a.name}</li>)
-                            })}
-                        </ul>
-                        <div v-show={!props.actions.length} class={s.noData}>暂无选项</div>
+                        {props.actions.map((a: any) => {
+                            return <div class={
+                                [t['action-list-item'],
+                                a.danger ? t['danger-item'] : '',
+                                a.disabled ? t['disabled-item'] : '']}
+                                onClick={() => { onClick(a) }}>{a[props.propOptions.label]}</div>
+                        })}
                     </main>
+                    <footer v-show={props.showCancel} onClick={close}>
+                        {props.cancelText}
+                    </footer>
                 </div>
-            </div>
-        )
+            </div> : ''}</>)
     }
 })
