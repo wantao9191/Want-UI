@@ -1,5 +1,5 @@
 import { createApp, h } from "vue";
-import { toast } from "./toast.tsx";
+import { toast } from "./toast";
 type props = {
     text: string
     duration: number

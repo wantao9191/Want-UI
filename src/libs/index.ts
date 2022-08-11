@@ -5,9 +5,9 @@ import { Noticebar } from "./Noticebar";
 import { Tabs } from "./Tabs/tabs";
 import { TabsPane } from "./Tabs/tabsPane";
 import { ActionSheet } from "./ActionSheet/index.tsx";
+import { actionSheet } from "./ActionSheet/actionSheet";
 
-
-export { Toast }
+export { Toast,actionSheet }
 function install(Vue: any) {
     Vue.component('want-icon', Icon)
     Vue.component('want-button', Button)
