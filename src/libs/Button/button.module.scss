@@ -3,7 +3,9 @@
     border-radius: $radius;
     color: #fff;
     cursor: pointer;
-
+    outline: 0;
+    border: 0;
+    background: #fff;
     &.round-button {
         border-radius: 24px;
     }
@@ -22,10 +24,11 @@
     &.want-default-button {
         border: 1px solid #ddd;
         color: #333;
-
+        
         &.fill-none {
             border: none;
         }
+
         >.loadingIndicator {
             border-color: #666 #666 #666 transparent;
         }
@@ -43,6 +46,10 @@
         &.fill-none {
             background: none;
             color: $primary;
+
+            >.loadingIndicator {
+                border-color: $primary $primary $primary transparent;
+            }
         }
     }
 
@@ -58,6 +65,9 @@
         &.fill-none {
             background: none;
             color: $success;
+            >.loadingIndicator {
+                border-color: $success $success $success transparent;
+            }
         }
     }
 
@@ -73,6 +83,9 @@
         &.fill-none {
             background: none;
             color: $warning;
+            >.loadingIndicator {
+                border-color: $warning $warning $warning transparent;
+            }
         }
     }
 
@@ -88,6 +101,9 @@
         &.fill-none {
             background: none;
             color: $danger;
+            >.loadingIndicator {
+                border-color: $danger $danger $danger transparent;
+            }
         }
     }
 

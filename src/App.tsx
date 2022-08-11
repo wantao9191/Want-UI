@@ -1,52 +1,42 @@
 import { defineComponent, reactive, ref } from 'vue'
 import t from './App.module.scss'
-import { Toast, actionSheet } from '@/libs'
+import { dialog } from '@/libs'
 export const App = defineComponent({
     setup(props, context) {
-        const showToast = () => {
-            const toastAction = Toast({ text: '一个toast！' })
-            toastAction.show()
+        const showBasic = () => {
+            dialog.confirm({ content: '基本用法 Confirm Dialog', confirmButtonText: '我知道了', cancelButtonType: 'danger', }).then(() => {
+                console.log('then')
+            }).catch(() => {
+                console.log('catch')
+            })
         }
-        const visible = ref(false)
-        const showAction = () => {
-            visible.value = true
+        const showAlert = () => {
+            dialog.alert({ content: '基本用法 Alert Dialog' }).then(() => {
+                console.log('then')
+            })
         }
-        const actions = reactive([
-            { label: '选项一', value: '1' },
-            { label: '选项二', value: '2', disabled: true, danger: true },
-            { label: '选项三', value: '3', danger: true },
-            { label: '选项四', value: '3' },
-        ])
-        const onAction = (value: any) => {
-            console.log(value)
-        }
-        const beforeClose = ((action: string, prop: any, done: any) => {
-            console.log(action)
-            // showToast()
-            // setTimeout(() => {
-            done()
-            // }, 2000);
-        })
-        const actionDirect = () => {
-            actionSheet({
-                actions, title: 'Action Sheet', cancelText: 'cancel', beforeClose: (action: string, prop: any, done: any) => {
-                    console.log(prop, action)
-                    // done()
+        const showAfter = () => {
+            dialog.confirm({
+                content: '异步关闭', beforeClose: (action: string, instance: any, done: any) => {
+                    console.log(action)
+                    if (action === 'confirm') {
+                        instance.confirmButtonLoading = true
+                        setTimeout(() => {
+                            instance.confirmButtonLoading = false
+                            done()
+                        }, 1000);
+                    } else {
+                        done()
+                    }
+
                 }
-            }).show()
+            })
         }
         return () => (
             <div>
-                <want-button onClick={showAction}>基本用法</want-button>
-                <want-button onClick={actionDirect}>指令调用</want-button>
-                <want-sheet-action
-                    v-model:visible={visible.value}
-                    title='Action Sheet' actions={actions}
-                    onAction={onAction}
-                    beforeClose={beforeClose}
-                    v-slots={{ title: () => 'slot-title' }}
-                    closeOnMaskClick={false}
-                ></want-sheet-action>
+                <want-button onClick={showBasic} block>Confirm</want-button>
+                <want-button onClick={showAlert} block>Alert</want-button>
+                <want-button onClick={showAfter} block>异步关闭</want-button>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, withModifiers } from 'vue'
 import t from './button.module.scss'
 export const Button = defineComponent({
     props: {
@@ -11,22 +11,22 @@ export const Button = defineComponent({
         loading: Boolean
     },
     setup(props, { slots, emit }) {
-        const onClick = (e: EventTarget) => {
-            if (props.disabled) return
+        const onClick = (e: any) => {
             emit('click', e)
         }
-        return () => (<span class={[
-            t['want-button'],
-            t[`want-${props.type}-button`],
-            t[props.size],
-            t[`fill-${props.fill}`],
-            props.block ? t['block-button'] : '',
-            props.disabled ? t['disabled-button'] : '',
-            props.round ? t['round-button'] : '',
-            props.loading ? t['loading-button'] : ''
-        ]} onClick={() => onClick}>
-            <i class={t.loadingIndicator}></i>
-            {slots.default?.()}
-        </span>)
+        return () => (
+            <button class={[
+                t['want-button'],
+                t[`want-${props.type}-button`],
+                t[props.size],
+                t[`fill-${props.fill}`],
+                props.block ? t['block-button'] : '',
+                props.disabled ? t['disabled-button'] : '',
+                props.round ? t['round-button'] : '',
+                props.loading ? t['loading-button'] : ''
+            ]} disabled={props.loading || props.disabled}>
+                <i class={t.loadingIndicator}></i>
+                {slots.default?.()}
+            </button>)
     }
 })

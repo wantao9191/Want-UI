@@ -1,13 +1,13 @@
 import { Toast } from "./toast";
-import { Icon } from "./Icon/index.tsx";
+import { Icon } from "./Icon/index";
 import { Button } from "./Button/index.jsx";
 import { Noticebar } from "./Noticebar";
 import { Tabs } from "./Tabs/tabs";
 import { TabsPane } from "./Tabs/tabsPane";
-import { ActionSheet } from "./ActionSheet/index.tsx";
+import { ActionSheet } from "./ActionSheet/index";
 import { actionSheet } from "./ActionSheet/actionSheet";
-
-export { Toast,actionSheet }
+import { dialog } from './Dailog/dialog'
+export { Toast, actionSheet, dialog }
 function install(Vue: any) {
     Vue.component('want-icon', Icon)
     Vue.component('want-button', Button)
