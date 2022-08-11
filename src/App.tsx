@@ -25,7 +25,7 @@ export const App = defineComponent({
             console.log(done)
             setTimeout(() => {
                 done()
-            }, 1000);
+            }, 2000);
         })
         return () => (
             <div>
