@@ -1,34 +1,39 @@
 .want-tabs {
-    .want-tabs-labels-wrap {
-        position: relative;
-        border-bottom: 1px solid #ddd;
-
-        .label-wrap {
-            cursor: pointer;
-            padding: 4px 12px;
-            display: inline-flex;
-
-            .label {
-                font-size: 14px;
-                &:not(.label-disabled) {
-                    &.active {
-                        color: $primary;
+    .want-tabs-labels{
+        width: 100%;
+        overflow-x: hidden;
+        .want-tabs-labels-wrap {
+            position: relative;
+            border-bottom: 1px solid #ddd;
+            min-width: 100%;
+            .label-wrap {
+                cursor: pointer;
+                padding: 4px 12px;
+                display: inline-flex;
+    
+                .label {
+                    font-size: 14px;
+                    &:not(.label-disabled) {
+                        &.active {
+                            color: $primary;
+                        }
+                    }
+    
+                    &.label-disabled {
+                        opacity: .4;
+                        cursor: not-allowed;
                     }
                 }
-
-                &.label-disabled {
-                    opacity: .4;
-                    cursor: not-allowed;
-                }
+            }
+    
+            .active-line {
+                position: absolute;
+                bottom: -1px;
+                height: 2.4px;
+                background-color: $primary;
+                transition: .5s all;
             }
         }
-
-        .active-line {
-            position: absolute;
-            bottom: -1px;
-            height: 2.4px;
-            background-color: $primary;
-            transition: .5s all;
-        }
     }
+    
 }
