@@ -6,11 +6,13 @@
             position: relative;
             border-bottom: 1px solid #ddd;
             min-width: 100%;
+            transition: .4s transform;
+            white-space: nowrap;
             .label-wrap {
                 cursor: pointer;
                 padding: 4px 12px;
                 display: inline-flex;
-    
+                
                 .label {
                     font-size: 14px;
                     &:not(.label-disabled) {
@@ -32,6 +34,7 @@
                 height: 2.4px;
                 background-color: $primary;
                 transition: .5s all;
+                left: 0;
             }
         }
     }
