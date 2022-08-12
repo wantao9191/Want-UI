@@ -1,0 +1,40 @@
+.want-collapse-pane {
+    header {
+        border-bottom: 1px solid #ddd;
+        padding: 12px 0;
+        display: flex;
+        justify-content: space-between;
+
+        .header-content {
+            flex: 1;
+
+        }
+
+        .header-icon {
+            .icon {
+                font-size: 14px;
+                color: #999;
+            }
+        }
+
+    }
+
+    main {
+
+        font-size: 14px;
+        color: #999;
+
+        &.main-slider {
+            max-height: 3000px;
+            transition: all 0.5s ;
+            border-bottom: 1px solid #ddd;
+            padding: 12px 0;
+        }
+
+        &.main-hidden {
+            transition: max-height .4s;
+            max-height: 0;
+            transition: all 0.5s ;
+        }
+    }
+}

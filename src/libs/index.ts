@@ -7,6 +7,9 @@ import { TabsPane } from "./Tabs/tabsPane";
 import { ActionSheet } from "./ActionSheet/index";
 import { actionSheet } from "./ActionSheet/actionSheet";
 import { dialog } from './Dailog/dialog'
+import { Collapse } from "./Collapse/Collapse";
+import { CollapsePane } from "./Collapse/CollapsePane";
+
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
     Vue.component('want-icon', Icon)
@@ -15,5 +18,7 @@ function install(Vue: any) {
     Vue.component('want-tabs', Tabs)
     Vue.component('want-tabs-pane', TabsPane)
     Vue.component('want-sheet-action', ActionSheet)
+    Vue.component('want-collapse', Collapse)
+    Vue.component('want-collapse-pane', CollapsePane)
 }
 export default { install }
