@@ -20,21 +20,19 @@
     }
 
     main {
-
+        transition: height 0.5s;
         font-size: 14px;
         color: #999;
+        position: relative;
 
         &.main-slider {
-            max-height: 3000px;
-            transition: all 0.5s ;
+            max-height: 300px;
             border-bottom: 1px solid #ddd;
             padding: 12px 0;
         }
 
         &.main-hidden {
-            transition: max-height .4s;
             max-height: 0;
-            transition: all 0.5s ;
         }
     }
 }
