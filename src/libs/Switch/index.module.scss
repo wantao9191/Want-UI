@@ -1,0 +1,121 @@
+$h: 22px;
+$h2: $h - 4px;
+$hs: 16px;
+$h2s: $hs - 2px;
+
+
+.active-text {
+    &.want-checked {
+        color: $primary;
+
+        &.danger {
+            color: $danger;
+        }
+
+        &.success {
+            color: $success;
+        }
+    }
+}
+
+.switch-text {
+    font-size: 14px;
+    vertical-align: middle;
+
+    &.small {
+        font-size: 12px;
+    }
+}
+
+.want-switch {
+    height: $h;
+    width: $h * 2;
+    border: none;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: calc($h/2);
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+
+    >span {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        height: $h2;
+        width: $h2;
+        background: white;
+        border-radius: calc($h2 / 2);
+        transition: all 250ms;
+    }
+
+    &.want-checked {
+        background: $primary;
+
+        >span {
+            left: calc(100% - #{ $h } + 2px);
+        }
+    }
+
+    &.want-checked.primary {
+        background: $primary;
+    }
+
+    &.want-checked.danger {
+        background: $danger;
+    }
+
+    &.want-checked.success {
+        background: $success;
+    }
+
+    &.disabled {
+        opacity: 0.3;
+    }
+
+    &.normal:active {
+        >span {
+            width: calc($h2 + 4px);
+        }
+    }
+
+    &.want-checked:active {
+        &.normal>span {
+            margin-left: -4px;
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.small {
+    height: $hs;
+    width: $hs * 2;
+
+    >span {
+        height: $h2s;
+        width: $h2s;
+        border-radius: calc($h2s/2);
+        top: 1.2px;
+        left: 1.2px;
+    }
+
+    &.want-checked {
+        >span {
+            left: calc(100% - #{$hs});
+        }
+    }
+
+    &.normal:active {
+        >span {
+            width: calc($h2s + 2px);
+        }
+    }
+
+    &.want-checked:active {
+        &.normal>span {
+            margin-left: -2px;
+        }
+    }
+}

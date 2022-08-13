@@ -9,6 +9,8 @@ import { actionSheet } from "./ActionSheet/actionSheet";
 import { dialog } from './Dailog/dialog'
 import { Collapse } from "./Collapse/Collapse";
 import { CollapsePane } from "./Collapse/CollapsePane";
+import { Switch } from "./Switch";
+import { Popup } from "./Popup";
 
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
@@ -20,5 +22,7 @@ function install(Vue: any) {
     Vue.component('want-sheet-action', ActionSheet)
     Vue.component('want-collapse', Collapse)
     Vue.component('want-collapse-pane', CollapsePane)
+    Vue.component('want-switch', Switch)
+    Vue.component('want-popup', Popup)
 }
 export default { install }

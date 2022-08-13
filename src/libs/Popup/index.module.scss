@@ -1,0 +1,92 @@
+.want-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .45);
+
+    .want-popup-wrap {
+        background: #fff;
+        position: absolute;
+        >main{
+            height: 100%;
+            overflow-y: auto;
+        }
+        &.popup-top {
+            top: 0;
+            left: 0;
+            height: 40vh;
+            width: 100%;
+            animation: top-in 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+
+            &.fadeout {
+                animation: bottom-top-out 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        }
+
+        &.popup-left {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 40vw;
+            animation: left-in 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            &.fadeout {
+                animation: left-right-out 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        }
+        &.popup-right {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 40vw;
+            animation: right-in 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            &.fadeout {
+                animation: left-right-out 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        }
+        &.popup-bottom {
+            bottom: 0;
+            left: 0;
+            height: 40vh;
+            width: 100%;
+            animation: bottom-in 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+
+            &.fadeout {
+                animation: bottom-top-out 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        }
+    }
+
+    @keyframes top-in {
+        0% {
+            transform: translateY(-100%);
+        }
+    }
+    @keyframes left-in {
+        0% {
+            transform: translateX(-100%);
+        }
+    }
+    @keyframes right-in {
+        0% {
+            transform: translateX(100%);
+        }
+    }
+    @keyframes left-right-out {
+        100% {
+            width: 0;
+        }
+    }
+    @keyframes bottom-in {
+        0% {
+            transform: translateY(100%);
+        }
+    }
+
+    @keyframes bottom-top-out {
+        100% {
+            height: 0;
+        }
+    }
+}
