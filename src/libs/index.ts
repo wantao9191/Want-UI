@@ -11,7 +11,8 @@ import { Collapse } from "./Collapse/Collapse";
 import { CollapsePane } from "./Collapse/CollapsePane";
 import { Switch } from "./Switch";
 import { Popup } from "./Popup";
-
+import { CheckBox } from "./Checkbox/checkBox";
+import { CheckBoxGroup } from "./Checkbox/checkBoxGrounp";
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
     Vue.component('want-icon', Icon)
@@ -24,5 +25,7 @@ function install(Vue: any) {
     Vue.component('want-collapse-pane', CollapsePane)
     Vue.component('want-switch', Switch)
     Vue.component('want-popup', Popup)
+    Vue.component('want-checkbox', CheckBox)
+    Vue.component('want-checkbox-group', CheckBoxGroup)
 }
 export default { install }

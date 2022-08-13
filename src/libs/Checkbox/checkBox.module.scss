@@ -1,0 +1,18 @@
+.want-checkbox {
+    font-size: 14px;
+
+    .icon {
+        font-weight: bold;
+        font-size: 16px;
+        color: #666;
+        margin-right: 4px;
+    }
+
+    .want-checkbox-checked {
+        color: $primary;
+    }
+    &.want-checkbox-disabled{
+        cursor: not-allowed;
+        opacity: .4;
+    }
+}

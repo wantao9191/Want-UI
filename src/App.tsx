@@ -3,21 +3,19 @@ import t from './App.module.scss'
 import { dialog } from '@/libs'
 export const App = defineComponent({
     setup(props, context) {
-        const visible = ref(false)
-        const position = ref('bottom')
-        const showBottom = (pos: string = 'bottom') => {
-            position.value = pos
-            visible.value = true
+        const value = ref(false)
+        const value1 = ref(false)
+        let groups = reactive(['1'])
+        const change = (value: any) => {
         }
         return () => (
             <div>
-                <want-button block onClick={() => showBottom('bottom')}>底部弹出</want-button>
-                <want-button block onClick={() => showBottom('top')} >顶部弹出</want-button>
-                <want-button block onClick={() => showBottom('left')} >左部弹出</want-button>
-                <want-button block onClick={() => showBottom('right')} >右部弹出</want-button>
-                <want-popup v-model:visible={visible.value} position={position.value}>
-                    {{ top: '顶', bottom: '底',left:'左',right:'右' }[position.value]}部弹出
-                </want-popup>
+                <want-checkbox v-model:value={value.value} disabled>复选框文案</want-checkbox>
+                <want-checkbox v-model:value={value1.value}>默认选中</want-checkbox>
+                <want-checkbox-group v-model:value={groups} onChange={change} disabled>
+                    <want-checkbox value='1'>复选框文案</want-checkbox>
+                    <want-checkbox value='2'>默认选中</want-checkbox>
+                </want-checkbox-group>
             </div>
         )
     }
