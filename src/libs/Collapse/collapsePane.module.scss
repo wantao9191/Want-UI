@@ -1,4 +1,8 @@
 .want-collapse-pane {
+    &.want-collapse-disabled-pane {
+        cursor: not-allowed;
+        opacity: .4;
+    }
     header {
         border-bottom: 1px solid #ddd;
         padding: 12px 0;
@@ -20,13 +24,13 @@
     }
 
     main {
-        transition: height 0.5s;
+        transition: all 0.5s;
         font-size: 14px;
         color: #999;
         position: relative;
 
         &.main-slider {
-            max-height: 300px;
+            max-height: 3000px;
             border-bottom: 1px solid #ddd;
             padding: 12px 0;
         }
