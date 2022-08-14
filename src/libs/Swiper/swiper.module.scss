@@ -1,0 +1,8 @@
+.want-swiper {
+    width: 100%;
+    overflow-x: hidden;
+    .want-swiper-wrap{
+        white-space: nowrap;
+        transition: .2s all;
+    }
+}
