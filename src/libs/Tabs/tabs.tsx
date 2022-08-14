@@ -49,7 +49,7 @@ export const Tabs = defineComponent({
             const { rect, ...refer } = prop
             props.beforeClose ? props.beforeClose(() => done(refer)) : done(refer)
         }
-        provide('value', computed(() => props.value))
+        provide('tabs:value', computed(() => props.value))
         return () => (
             <div class={t['want-tabs']}>
                 <div class={t['want-tabs-labels']}>

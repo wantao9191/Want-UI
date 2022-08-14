@@ -7,7 +7,7 @@ export const TabsPane = defineComponent({
         disabled: Boolean
     },
     setup(props, { slots }) {
-        const value: any = inject('value')
+        const value: any = inject('tabs:value')
         return () => (<div class={t['want-tabs-pane']} v-show={value?.value === props.name && !props.disabled}>{slots.default?.()}</div>)
     }
 })

@@ -5,9 +5,9 @@ export const Collapse = defineComponent({
     emits: ['update:value'],
     setup(props, { slots, emit }) {
         const actives = computed(() => props.value)
-        provide('value', actives)
-        provide('accordion', computed(() => props.accordion))
-        provide('updateValue', (name: string | number) => {
+        provide('collapse:value', actives)
+        provide('collapse:accordion', computed(() => props.accordion))
+        provide('collapse:updateValue', (name: string | number) => {
             if (props.accordion) {
                 emit('update:value', name)
             } else {

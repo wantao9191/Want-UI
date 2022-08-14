@@ -5,12 +5,12 @@ export const CollapsePane = defineComponent({
     components: { wantIcon: Icon },
     props: { title: String, name: [String, Number], disabled: Boolean },
     setup(props, { slots }) {
-        const value: any = inject('value')
-        const accordion:any = inject('accordion')
-        const updateValue: any = inject('updateValue')
+        const value: any = inject('collapse:value')
+        const accordion: any = inject('collapse:accordion')
+        const updateValue: any = inject('collapse:updateValue')
         const visible = ref(false)
         const slider = computed(() => {
-            return accordion.value ?value.value === props.name : value.value.includes(props.name)
+            return accordion.value ? value.value === props.name : value.value.includes(props.name)
         })
         const click = () => {
             if (props.disabled) return
