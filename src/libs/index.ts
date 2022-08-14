@@ -13,6 +13,10 @@ import { Switch } from "./Switch";
 import { Popup } from "./Popup";
 import { CheckBox } from "./Checkbox/checkBox";
 import { CheckBoxGroup } from "./Checkbox/checkBoxGrounp";
+import { Radio } from "./Radio/radio";
+import { RadioGroup } from "./Radio/radioGroup";
+
+
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
     Vue.component('want-icon', Icon)
@@ -27,5 +31,7 @@ function install(Vue: any) {
     Vue.component('want-popup', Popup)
     Vue.component('want-checkbox', CheckBox)
     Vue.component('want-checkbox-group', CheckBoxGroup)
+    Vue.component('want-radio', Radio)
+    Vue.component('want-radio-group', RadioGroup)
 }
 export default { install }
