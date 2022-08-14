@@ -3,19 +3,21 @@ import t from './App.module.scss'
 import { dialog } from '@/libs'
 export const App = defineComponent({
     setup(props, context) {
-        const value = ref(false)
-        const value1 = ref(true)
-        let groups = ref('2')
-        const change = (value: any) => {
+        const visible = ref(false)
+        const openModel = () => {
+            visible.value = !visible.value
+        }
+        const slots = {
+            title:()=>{ return <>slot header</>},
+            footer:()=>{return <want-button block type='primary' onClick={openModel}>确定</want-button>}
         }
         return () => (
             <div>
-                <want-radio v-model:value={value.value}>复选框文案</want-radio>
-                <want-radio v-model:value={value1.value} disabled>默认选中</want-radio>
-                <want-radio-group v-model:value={groups.value} onChange={change} disabled>
-                    <want-radio value='1'>复选框文案</want-radio>
-                    <want-radio value='2'>默认选中</want-radio>
-                </want-radio-group>
+                <want-button  type='primary' size='mini'>确定</want-button>
+                <want-button block onClick={openModel}>Open Modal</want-button>
+                <want-modal v-model:visible={visible.value} align='left' v-slots={slots} title='标题'>
+                    1111
+                </want-modal>
             </div>
         )
     }

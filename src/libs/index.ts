@@ -15,7 +15,7 @@ import { CheckBox } from "./Checkbox/checkBox";
 import { CheckBoxGroup } from "./Checkbox/checkBoxGrounp";
 import { Radio } from "./Radio/radio";
 import { RadioGroup } from "./Radio/radioGroup";
-
+import { Modal } from "./Modal";
 
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
@@ -33,5 +33,6 @@ function install(Vue: any) {
     Vue.component('want-checkbox-group', CheckBoxGroup)
     Vue.component('want-radio', Radio)
     Vue.component('want-radio-group', RadioGroup)
+    Vue.component('want-modal', Modal)
 }
 export default { install }

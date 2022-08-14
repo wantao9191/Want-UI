@@ -1,0 +1,31 @@
+.want-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .45);
+    .want-modal-wrap {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80vw;
+        text-align: center;
+        border-radius: $radius;
+        background-color: #fff;
+        transform: translate(-50%,-50%);
+        &.want-modal-left{
+            text-align: left;
+        }
+        header {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        main {
+            padding:12px  12px  0;
+        }
+        footer{
+            padding: 12px;
+        }
+    }
+}
