@@ -16,6 +16,9 @@
         bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
+        &.dots-outside {
+            bottom: -20px;
+        }
         .dot {
             display: inline-block;
             width: 8px;

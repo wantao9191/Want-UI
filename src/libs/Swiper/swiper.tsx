@@ -5,7 +5,8 @@ export const Swiper = defineComponent({
         activeIndex: { type: Number, default: 0 },
         duration: { type: Number, default: 2000 },
         autopaly: Boolean,
-        loop: Boolean
+        loop: Boolean,
+        dotOutside:Boolean
     },
     emits: ['update:value'],
     setup(props, { slots, emit }) {
@@ -126,7 +127,7 @@ export const Swiper = defineComponent({
                     {slots.default?.()}
                 </div>
             </div>
-            <div class={t['want-dots-wrap']}>
+            <div class={[t['want-dots-wrap'],props.dotOutside ? t['dots-outside'] : '']}>
                 {dots.value.map((d: any, i: number) => {
                     return <span class={[t.dot, activePage.value === i ? t['dot-active'] : '']}></span>
                 })}
