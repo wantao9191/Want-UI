@@ -1,8 +1,34 @@
 .want-swiper {
     width: 100%;
-    overflow-x: hidden;
-    .want-swiper-wrap{
-        white-space: nowrap;
-        transition: .2s all;
+    position: relative;
+    .want-swiper-main {
+        overflow-x: hidden;
+        width: 100%;
+        .want-swiper-wrap {
+            white-space: nowrap;
+            &.animation {
+                transition: .2s all;
+            }
+        }
+    }
+    .want-dots-wrap {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #999;
+            margin: 0 2px;
+            transition: all .2s;
+            &.dot-active {
+                width: 24px;
+                border-radius: 8px;
+                background: $primary;
+            }
+        }
     }
 }
