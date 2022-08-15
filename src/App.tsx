@@ -3,25 +3,14 @@ import t from './App.module.scss'
 import { dialog } from '@/libs'
 export const App = defineComponent({
     setup(props, context) {
+        const visible = ref(false)
+        const aciton = () => {
+            visible.value = !visible.value
+        }
         return () => (
             <div>
-                <want-swiper >
-                    <want-swiper-item>
-                        <div style='height:20vh;background:lightblue'>1</div>
-                    </want-swiper-item>
-                    <want-swiper-item>
-                        <div style='height:20vh;background:lightgreen'>2</div>
-                    </want-swiper-item>
-                    <want-swiper-item>
-                        <div style='height:20vh;background:lightyellow'>3</div>
-                    </want-swiper-item>
-                    <want-swiper-item>
-                        <div style='height:20vh;background:lightpink'>4</div>
-                    </want-swiper-item>
-                    <want-swiper-item>
-                        <div style='height:20vh;background:lightsalmon'>5</div>
-                    </want-swiper-item>
-                </want-swiper>
+                <want-button block onClick={aciton}>选择</want-button>
+                <want-picker v-model:visible={visible.value}></want-picker>
             </div>
         )
     }

@@ -1,0 +1,16 @@
+.want-picker {
+    height: 100%;
+
+    >header {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    >main {
+        display: flex;
+        height: calc(100% - 50px);
+        position: relative;        
+    }
+}

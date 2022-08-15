@@ -18,6 +18,7 @@ import { RadioGroup } from "./Radio/radioGroup";
 import { Modal } from "./Modal";
 import { Swiper } from "./Swiper/swiper";
 import { swiperItem } from "./Swiper/swiperItem";
+import { Picker } from "./Picker";
 
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
@@ -38,5 +39,6 @@ function install(Vue: any) {
     Vue.component('want-modal', Modal)
     Vue.component('want-swiper', Swiper)
     Vue.component('want-swiper-item', swiperItem)
+    Vue.component('want-picker', Picker)
 }
 export default { install }
