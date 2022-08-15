@@ -6,7 +6,8 @@ export const Swiper = defineComponent({
         duration: { type: Number, default: 2000 },
         autopaly: Boolean,
         loop: Boolean,
-        dotOutside:Boolean
+        dotOutside:Boolean,
+        indicator:{type:Boolean,default:true}
     },
     emits: ['update:value'],
     setup(props, { slots, emit }) {
@@ -127,7 +128,7 @@ export const Swiper = defineComponent({
                     {slots.default?.()}
                 </div>
             </div>
-            <div class={[t['want-dots-wrap'],props.dotOutside ? t['dots-outside'] : '']}>
+            <div class={[t['want-dots-wrap'],props.dotOutside ? t['dots-outside'] : '']} v-show={props.indicator}>
                 {dots.value.map((d: any, i: number) => {
                     return <span class={[t.dot, activePage.value === i ? t['dot-active'] : '']}></span>
                 })}

@@ -5,7 +5,7 @@ export const App = defineComponent({
     setup(props, context) {
         return () => (
             <div>
-                <want-swiper>
+                <want-swiper >
                     <want-swiper-item>
                         <div style='height:20vh;background:lightblue'>1</div>
                     </want-swiper-item>
