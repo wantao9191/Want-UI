@@ -14,7 +14,7 @@ export const Picker = defineComponent({
         const value = reactive([{}, {}, {}])
         const yearIndex = ref(0)
         const monthIndex = ref(0)
-        const columns: any = []
+        const columns: any = reactive([]) 
         for (let i = 2000; i < 2050; i++) {
             columns.push({
                 label: i, children: Array.from(new Array(12).keys()).map(a => {

@@ -32,15 +32,17 @@ export const PickerItem = defineComponent({
             emit('update:value', { label })
         }
         const labelClick = (i: number) => {
-            const index = Math.abs(transIndex.value)
+            const index: number = Math.abs(transIndex.value)
             i > index ? moveY.value -= 40 * (i - index) : moveY.value += (index - i) * 40
             transY = moveY.value
+            const label: string = props.columns[index]?.label ?? ''
+            emit('update:value', { label })
         }
         return () => (
             <div class={t['want-picker-scroll']} ref={$main}
-                onTouchstart={($event) => { touchstart($event) }}
-                onTouchmove={$event => { touchmove($event) }}
-                onTouchend={$event => { touchend($event) }}>
+                onTouchstart={touchstart}
+                onTouchmove={touchmove}
+                onTouchend={touchend}>
                 <ul style={{ transform: `translateY(${moveY.value}px)` }}>
                     {props.columns.map((y: any, i: number) => {
                         return <li class={Math.abs(transIndex.value) == i ? t['active'] : ''} onClick={() => { labelClick(i) }}>{y.label}</li>
