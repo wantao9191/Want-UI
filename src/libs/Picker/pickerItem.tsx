@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, nextTick } from 'vue'
+import { defineComponent, ref, computed, nextTick, onUpdated, onMounted } from 'vue'
 import t from './pickerItem.module.scss'
 export const PickerItem = defineComponent({
     props: { columns: { type: Array, default: [] }, value: { type: [String, Number, Object] } },
@@ -11,6 +11,12 @@ export const PickerItem = defineComponent({
         const selectBoxTrans = computed(() => {
             const height = $main.value?.clientHeight ?? 0
             return Math.floor(height / 2 / 40) * 40
+        })
+        const defaultIndex = computed({
+            get: () => { return getDefaultIndex() },
+            set: value => {
+                return getDefaultIndex()
+            }
         })
         const transIndex = computed(() => {
             const moveValue = moveY.value > 0 ? Math.floor(moveY.value / 40) : Math.ceil(moveY.value / 40)
@@ -38,6 +44,13 @@ export const PickerItem = defineComponent({
             const label: string = props.columns[index]?.label ?? ''
             emit('update:value', { label })
         }
+        const getDefaultIndex = () => {
+            const index = props.value.label && props.columns.findIndex((c: any) => c.label === props.value.label)
+            if (index > -1) {
+                labelClick(index)
+            }
+            return index
+        }
         return () => (
             <div class={t['want-picker-scroll']} ref={$main}
                 onTouchstart={touchstart}
@@ -45,7 +58,7 @@ export const PickerItem = defineComponent({
                 onTouchend={touchend}>
                 <ul style={{ transform: `translateY(${moveY.value}px)` }}>
                     {props.columns.map((y: any, i: number) => {
-                        return <li class={Math.abs(transIndex.value) == i ? t['active'] : ''} onClick={() => { labelClick(i) }}>{y.label}</li>
+                        return <li class={[Math.abs(transIndex.value) == i ? t['active'] : '', defaultIndex.value == i ? 'select' : '']} onClick={() => { labelClick(i) }}>{y.label}</li>
                     })}
                 </ul>
                 <div class={t["select-box"]} style={{ transform: `translateY(${selectBoxTrans.value}px)` }}></div>

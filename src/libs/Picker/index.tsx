@@ -11,7 +11,10 @@ export const Picker = defineComponent({
     emits: ['update:visible'],
     setup(props, { slots, emit }) {
         const visible = computed(() => props.visible)
-        const value = reactive([{}, {}, {}])
+        const value = reactive([{label:2022}, {}, {}])
+        setTimeout(() => {
+            value[0].label = 2040
+        }, 2000);
         const yearIndex = ref(0)
         const monthIndex = ref(0)
         const columns: any = reactive([]) 
@@ -33,8 +36,8 @@ export const Picker = defineComponent({
             <want-popup visible={visible.value} onUpdate:visible={update} round>
                 <div class={t['want-picker']}>
                     <header>
-                        <want-button size='mini' fill='none' type='primary'>取消</want-button>
-                        <want-button size='mini' fill='none' type='primary'>确定</want-button>
+                        <want-button size='small' fill='none' type='primary'>取消</want-button>
+                        <want-button size='small' fill='none' type='primary'>确定</want-button>
                     </header>
                     <main>
                         <picker-item columns={columns} v-model:value={value[0]}></picker-item>
