@@ -16,12 +16,12 @@ export const Picker = defineComponent({
         watch(() => props.value, (newVal, oldVal) => {
             value = reactive([...newVal])
         }, { deep: true })
+        const columns = reactive([JSON.parse(JSON.stringify(props.columns))])
         const propsColums: any = computed(() => {
             // const results: any = {}
             // flat(props.columns, results)
             // const valuesArr: any = Object.values(results)
             // return valuesArr
-            console.log(props.columns)
             return props.columns
         })
         const update = (value: boolean) => {
@@ -50,10 +50,19 @@ export const Picker = defineComponent({
                 results[k] ? results[k].push(arr[k]) : results[k] = [arr[k]]
             }
         }
-        const pickerChange = (e: any, i: number, rows?: any) => {
+        const pickerChange = (e: any, i: number) => {
             value[i] = e
             // console.log(value, '----')
             emit('picker:change', value)
+        }
+        const pickerItemUpdate = (v: string, index: number) => {
+            const item = columns[index]?.find((c: any) => c.label == v ) ||{}
+            if (item.children) {
+                columns.splice(index + 1, 1, item.children)
+            } else {
+                columns.splice(index + 1, 1)
+            }
+            console.log(columns[index], index,v)
         }
         return () => (
             <want-popup visible={visible.value} onUpdate:visible={update} round>
@@ -63,8 +72,13 @@ export const Picker = defineComponent({
                         <want-button size='mini' fill='none' type='primary' onClick={confirm}>确定</want-button>
                     </header>
                     <main>
-                        {propsColums.value.map((p: any, i: number) => {
-                            return <picker-item columns={p} value={value[i]} onUpdate:value={(e: any) => { pickerChange(e, i, p[0]) }}></picker-item>
+                        {columns.map((p: any, i: number) => {
+                            return <picker-item
+                                columns={p} index={i}
+                                value={value[i]}
+                                onUpdate:value={(e: any) => { pickerChange(e, i) }}
+                                onPicker-item:update={(v: string, index: number) => { pickerItemUpdate(v, index) }}
+                            ></picker-item>
                         })}
                     </main>
                 </div>

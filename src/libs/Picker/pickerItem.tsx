@@ -1,8 +1,8 @@
-import { defineComponent, ref, computed, nextTick, onUpdated, onMounted } from 'vue'
+import { defineComponent, ref, computed, nextTick ,watch} from 'vue'
 import t from './pickerItem.module.scss'
 export const PickerItem = defineComponent({
-    props: { columns: { type: Array, default: [] }, value: { type: [String, Number, Object] } },
-    emits: ['update:value'],
+    props: { columns: { type: Array, default: [] }, value: { type: [String, Number, Object] } ,index:Number},
+    emits: ['update:value','picker-item:update'],
     setup(props, { emit }) {
         const $main: any = ref('')
         let startY = 0
@@ -24,12 +24,6 @@ export const PickerItem = defineComponent({
             const height = $main.value?.clientHeight ?? 0
             return Math.floor(height / 2 / 40) * 40
         })
-        const defaultIndex = computed({
-            get: () => { return getDefaultIndex() },
-            set: value => {
-                return getDefaultIndex()
-            }
-        })
         const transIndex = computed(() => {
             const moveValue = moveY.value > 0 ? Math.floor((moveY.value - selectBoxTrans.value) / 40) : Math.ceil((moveY.value - selectBoxTrans.value) / 40)
             return Math.abs(moveValue)
@@ -43,8 +37,8 @@ export const PickerItem = defineComponent({
             moveY.value = e.touches[0].pageY - startY + transY
             if (moveY.value > selectBoxTrans.value) {
                 moveY.value = selectBoxTrans.value
-            }else if(Math.abs(moveY.value)  > (props.columns.length-1) *40-selectBoxTrans.value){
-                moveY.value = -((props.columns.length-1) *40-selectBoxTrans.value)
+            } else if (Math.abs(moveY.value) > (props.columns.length - 1) * 40 - selectBoxTrans.value) {
+                moveY.value = -((props.columns.length - 1) * 40 - selectBoxTrans.value)
             }
         }
         const touchend = (e: TouchEvent) => {
@@ -53,16 +47,13 @@ export const PickerItem = defineComponent({
                 touching.value = false
             })
         }
-        const labelClick = (label: number|string) => {
-            emit('update:value',label)
+        const labelClick = (label: number | string) => {
+            emit('update:value', label)
         }
-        const getDefaultIndex = () => {
-            const index = props.value.label && props.columns.findIndex((c: any) => c.label === props.value.label)
-            if (index > -1) {
-                labelClick(index)
-            }
-            return index
-        }
+        watch(() => props.value, (n, o) => {
+            emit('picker-item:update', n, props.index)
+        })
+
         return () => (
             <div class={t['want-picker-scroll']} ref={$main}
                 onTouchstart={touchstart}
