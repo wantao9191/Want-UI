@@ -1,4 +1,4 @@
-import { computed, defineComponent, reactive, ref } from 'vue'
+import { computed, defineComponent, reactive, ref, watch } from 'vue'
 import { PickerItem } from './pickerItem'
 import t from './index.module.scss'
 export const Picker = defineComponent({
@@ -6,16 +6,24 @@ export const Picker = defineComponent({
     props: {
         title: String,
         visible: Boolean,
+        value: { type: Array, default: [] },
         columns: { type: Array, default: [] },
-        value: { type: Array }
     },
-    emits: ['update:visible', 'update:value'],
+    emits: ['update:visible', 'update:value', 'confirm', 'picker:change'],
     setup(props, { slots, emit }) {
         const visible = computed(() => props.visible)
-        const value: any = reactive(['', '', ''])
-        const yearIndex = ref(0)
-        const monthIndex = ref(0)
-        const propsColums = props.columns
+        let value: any = props.value
+        watch(() => props.value, (newVal, oldVal) => {
+            value = reactive([...newVal])
+        }, { deep: true })
+        const propsColums: any = computed(() => {
+            // const results: any = {}
+            // flat(props.columns, results)
+            // const valuesArr: any = Object.values(results)
+            // return valuesArr
+            console.log(props.columns)
+            return props.columns
+        })
         const update = (value: boolean) => {
             emit('update:visible', value)
         }
@@ -25,9 +33,27 @@ export const Picker = defineComponent({
         const confirm = () => {
             emit('update:value', value)
             emit('update:visible', false)
+            emit('confirm')
         }
-        const updateValue = (value: any) => {
-            emit('update:value', value)
+        const flat = (data: any, results: any) => {
+            let arr: any = {}
+            data.forEach((d: any) => {
+                const { children, ...i } = d
+                if (!i.pid) {
+                    results['default'] ? results['default'].push(i) : results['default'] = [i]
+                } else {
+                    arr[i.pid] ? arr[i.pid].push({ label: i.label }) : arr[i.pid] = [{ label: i.label }]
+                }
+                if (d.children) flat(d.children, results)
+            })
+            for (let k in arr) {
+                results[k] ? results[k].push(arr[k]) : results[k] = [arr[k]]
+            }
+        }
+        const pickerChange = (e: any, i: number, rows?: any) => {
+            value[i] = e
+            // console.log(value, '----')
+            emit('picker:change', value)
         }
         return () => (
             <want-popup visible={visible.value} onUpdate:visible={update} round>
@@ -38,12 +64,13 @@ export const Picker = defineComponent({
                         <want-button size='mini' fill='none' type='primary' onClick={confirm}>确定</want-button>
                     </header>
                     <main>
-                        <picker-item columns={propsColums} v-model:value={value[0]}></picker-item>
-                        {/* <picker-item columns={columns[yearIndex.value].children} v-model:value={value[1]}></picker-item>
-                        <picker-item columns={columns[yearIndex.value].children[monthIndex.value].children} v-model:value={value[2]}></picker-item> */}
+                        {propsColums.value.map((p: any, i: number) => {
+                            return <picker-item columns={p} value={value[i]} onUpdate:value={(e: any) => { pickerChange(e, i, p[0]) }}></picker-item>
+                        })}
                     </main>
                 </div>
             </want-popup>
         )
     }
+
 })
