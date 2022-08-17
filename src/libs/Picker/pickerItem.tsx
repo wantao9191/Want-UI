@@ -7,7 +7,19 @@ export const PickerItem = defineComponent({
         const $main: any = ref('')
         let startY = 0
         let transY = 0
+        const touching = ref(false)
         const moveY = ref(0)
+        const transMove = computed(() => {
+            let index: number = props.columns.findIndex((c: any) => c.label == props.value)
+            index = index > -1 ? index : 0
+            let moveIndex = moveY.value <= 0 ? -index : index
+            let moveTrans = moveIndex * 40 + selectBoxTrans.value
+            if (moveY.value > 0 && moveY.value <= selectBoxTrans.value) {
+                moveTrans = (selectBoxTrans.value / 40 - moveIndex) * 40
+            }
+            transY = moveTrans
+            return moveTrans
+        })
         const selectBoxTrans = computed(() => {
             const height = $main.value?.clientHeight ?? 0
             return Math.floor(height / 2 / 40) * 40
@@ -19,30 +31,30 @@ export const PickerItem = defineComponent({
             }
         })
         const transIndex = computed(() => {
-            const moveValue = moveY.value > 0 ? Math.floor(moveY.value / 40) : Math.ceil(moveY.value / 40)
-            return moveValue - selectBoxTrans.value / 40
+            const moveValue = moveY.value > 0 ? Math.floor((moveY.value - selectBoxTrans.value) / 40) : Math.ceil((moveY.value - selectBoxTrans.value) / 40)
+            return Math.abs(moveValue)
         })
         const touchstart = (e: TouchEvent) => {
+            touching.value = true
+            moveY.value = transMove.value
             startY = e.touches[0].pageY
         }
         const touchmove = (e: TouchEvent) => {
             moveY.value = e.touches[0].pageY - startY + transY
+            if (moveY.value > selectBoxTrans.value) {
+                moveY.value = selectBoxTrans.value
+            }else if(Math.abs(moveY.value)  > (props.columns.length-1) *40-selectBoxTrans.value){
+                moveY.value = -((props.columns.length-1) *40-selectBoxTrans.value)
+            }
         }
         const touchend = (e: TouchEvent) => {
-            let index = Math.floor(moveY.value / 40)
-            index > selectBoxTrans.value / 40 ? index = selectBoxTrans.value / 40 : index = index
-            Math.abs(index) > (props.columns.length - selectBoxTrans.value / 40) ? index = (-props.columns.length + 1) + selectBoxTrans.value / 40 : index = index
-            moveY.value = index * 40
-            transY = moveY.value
-            const label: string = props.columns[Math.abs(transIndex.value)]?.label ?? ''
-            emit('update:value', { label })
+            emit('update:value', props.columns[transIndex.value]?.label)
+            nextTick(() => {
+                touching.value = false
+            })
         }
-        const labelClick = (i: number) => {
-            const index: number = Math.abs(transIndex.value)
-            i > index ? moveY.value -= 40 * (i - index) : moveY.value += (index - i) * 40
-            transY = moveY.value
-            const label: string = props.columns[index]?.label ?? ''
-            emit('update:value', { label })
+        const labelClick = (label: number|string) => {
+            emit('update:value',label)
         }
         const getDefaultIndex = () => {
             const index = props.value.label && props.columns.findIndex((c: any) => c.label === props.value.label)
@@ -56,9 +68,9 @@ export const PickerItem = defineComponent({
                 onTouchstart={touchstart}
                 onTouchmove={touchmove}
                 onTouchend={touchend}>
-                <ul style={{ transform: `translateY(${moveY.value}px)` }}>
+                <ul style={{ transform: `translateY(${touching.value ? moveY.value : transMove.value}px)` }}>
                     {props.columns.map((y: any, i: number) => {
-                        return <li class={[Math.abs(transIndex.value) == i ? t['active'] : '', defaultIndex.value == i ? 'select' : '']} onClick={() => { labelClick(i) }}>{y.label}</li>
+                        return <li class={props.value == y.label ? t['active'] : ''} onClick={() => { labelClick(y.label) }}>{y.label}</li>
                     })}
                 </ul>
                 <div class={t["select-box"]} style={{ transform: `translateY(${selectBoxTrans.value}px)` }}></div>
