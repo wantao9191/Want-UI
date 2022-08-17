@@ -70,7 +70,7 @@ export const PickerItem = defineComponent({
                 onTouchend={touchend}>
                 <ul style={{ transform: `translateY(${touching.value ? moveY.value : transMove.value}px)` }}>
                     {props.columns.map((y: any, i: number) => {
-                        return <li class={props.value == y.label ? t['active'] : ''} onClick={() => { labelClick(y.label) }}>{y.label}</li>
+                        return <li class={props.value == y.label ? t['active'] : ''} key={i} onClick={() => { labelClick(y.label) }}>{y.label}</li>
                     })}
                 </ul>
                 <div class={t["select-box"]} style={{ transform: `translateY(${selectBoxTrans.value}px)` }}></div>

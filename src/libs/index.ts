@@ -19,6 +19,7 @@ import { Modal } from "./Modal";
 import { Swiper } from "./Swiper/swiper";
 import { swiperItem } from "./Swiper/swiperItem";
 import { Picker } from "./Picker";
+import { TimePicker } from "./TimePicker";
 
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
@@ -40,5 +41,6 @@ function install(Vue: any) {
     Vue.component('want-swiper', Swiper)
     Vue.component('want-swiper-item', swiperItem)
     Vue.component('want-picker', Picker)
+    Vue.component('want-time-picker', TimePicker)
 }
 export default { install }
