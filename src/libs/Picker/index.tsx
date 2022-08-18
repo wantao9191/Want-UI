@@ -54,12 +54,15 @@ export const Picker = defineComponent({
 
         }
         const setColums = (e: any, i: number) => {
-            const item = columns[i]?.find((c: any) => c.label == e) || columns[i][0]
-            if (item.children) {
-                columns.splice(i + 1, 1, item.children)
-            } else {
-                columns.splice(i + 1, 1)
+            if (columns[i]) {
+                const item = columns[i].find((c: any) => c.label == e) || columns[i][0]
+                if (item.children) {
+                    columns.splice(i + 1, 1, item.children)
+                } else {
+                    columns.splice(i + 1, 1)
+                }
             }
+
         }
         props.value.forEach((v: any, i: number) => {
             setColums(v, i)

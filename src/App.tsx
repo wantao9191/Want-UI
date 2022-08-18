@@ -5,7 +5,7 @@ export const App = defineComponent({
     setup(props, context) {
         const visible = ref(false)
         const visible1 = ref(false)
-        let value: any = reactive(['安徽', '安庆'])
+        let value: any = reactive(['安徽','1'])
         let value1: any = reactive([])
         const aciton = () => {
             visible.value = !visible.value
@@ -13,37 +13,21 @@ export const App = defineComponent({
         const aciton1 = () => {
             visible1.value = !visible1.value
         }
-        setTimeout(() => {
-            // value.push('江苏')
-        }, 1000);
         const columns = [{
             label: '江苏',
-            children: [
-                { label: '南京' },
-                { label: '苏州' },
-                { label: '无锡' },
-                { label: '徐州' },
-                { label: '南通' },
-                { label: '扬州' },
-            ]
         },
         {
             label: '安徽',
-            children: [
-                { label: '合肥' },
-                { label: '芜湖' },
-                { label: '铜陵' },
-                { label: '安庆' },
-                { label: '池州' },
-                { label: '黄山' },
-                { label: '南京' },
-                { label: '苏州' },
-                { label: '无锡' },
-                { label: '徐州' },
-                { label: '南通' },
-                { label: '扬州' },
-            ]
-        }]
+        }, {
+            label: '浙江'
+        }, {
+            label: '广西'
+        }, {
+            label: '广州'
+        }, {
+            label: '云南'
+        }
+    ]
 
         return () => (
             <div>
