@@ -1,10 +1,11 @@
-import { defineComponent, ref, computed, nextTick } from 'vue'
+import { defineComponent, ref, computed, nextTick, watch } from 'vue'
 import t from './pickerItem.module.scss'
 export const PickerItem = defineComponent({
-    props: { columns: { type: Array, default: [] }, value: { type: [String, Number, Object] } },
+    props: { columns: { type: Array, default: [] }, value: { type: [String, Number, Object] }, index: Number },
     emits: ['update:value'],
     setup(props, { emit }) {
         const $main: any = ref('')
+        let init = false
         let startY = 0
         let transY = 0
         const touching = ref(false)
@@ -37,8 +38,8 @@ export const PickerItem = defineComponent({
             moveY.value = e.touches[0].pageY - startY + transY
             if (moveY.value > selectBoxTrans.value) {
                 moveY.value = selectBoxTrans.value
-            }else if(Math.abs(moveY.value)  > (props.columns.length-1) *40-selectBoxTrans.value){
-                moveY.value = -((props.columns.length-1) *40-selectBoxTrans.value)
+            } else if (Math.abs(moveY.value) > (props.columns.length) * 40 - selectBoxTrans.value) {
+                moveY.value = -((props.columns.length - 1) * 40 - selectBoxTrans.value)
             }
         }
         const touchend = (e: TouchEvent) => {
@@ -47,8 +48,15 @@ export const PickerItem = defineComponent({
                 touching.value = false
             })
         }
-        const labelClick = (label: number|string) => {
-            emit('update:value',label)
+        const labelClick = (label: number | string) => {
+            emit('update:value', label)
+        }
+        watch(() => props.columns, (n, o) => {
+            const label: string = n[0]?.label ?? ''
+            labelClick(label)
+        }, { deep: true })
+        if (!props.value && props.value != props.columns[0]?.label) {
+            labelClick(props.columns[0]?.label ?? '')
         }
         return () => (
             <div class={t['want-picker-scroll']} ref={$main}
