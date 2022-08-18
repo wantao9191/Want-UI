@@ -20,6 +20,7 @@ import { Swiper } from "./Swiper/swiper";
 import { swiperItem } from "./Swiper/swiperItem";
 import { Picker } from "./Picker";
 import { Input } from "./Input";
+import { SwipeAction } from "./SwipeAction";
 
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
@@ -42,5 +43,6 @@ function install(Vue: any) {
     Vue.component('want-swiper-item', swiperItem)
     Vue.component('want-picker', Picker)
     Vue.component('want-input', Input)
+    Vue.component('want-swipe-action', SwipeAction)
 }
 export default { install }

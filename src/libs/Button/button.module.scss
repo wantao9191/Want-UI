@@ -10,7 +10,9 @@
     &.round-button {
         border-radius: 24px;
     }
-
+    &.square-button{
+        border-radius: 0;
+    }
     &.disabled-button,
     &.loading-button {
         opacity: .6;

@@ -1,0 +1,24 @@
+.want-swipe-action {
+    width: 100%;
+    overflow-x: hidden;
+
+    .want-swipe-wrap {
+        white-space: nowrap;
+        &.animation {
+            transition: .2s all;
+        }
+        .want-swipe-left {
+            display: inline-block;
+        }
+
+        .want-swipe-action-main {
+            width: 100%;
+            display: inline-block;
+        }
+
+        .want-swipe-right {
+            display: inline-block;
+        }
+    }
+
+}

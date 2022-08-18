@@ -8,7 +8,8 @@ export const Button = defineComponent({
         block: Boolean,
         disabled: Boolean,
         round: Boolean,
-        loading: Boolean
+        loading: Boolean,
+        square:Boolean
     },
     setup(props, { slots, emit }) {
         const onClick = (e: any) => {
@@ -23,6 +24,7 @@ export const Button = defineComponent({
                 props.block ? t['block-button'] : '',
                 props.disabled ? t['disabled-button'] : '',
                 props.round ? t['round-button'] : '',
+                props.square ? t['square-button'] : '',
                 props.loading ? t['loading-button'] : ''
             ]} disabled={props.loading || props.disabled}>
                 <i class={t.loadingIndicator}></i>
