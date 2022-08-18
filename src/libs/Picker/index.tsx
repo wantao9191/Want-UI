@@ -52,7 +52,6 @@ export const Picker = defineComponent({
         }
         const pickerChange = (e: any, i: number, rows?: any) => {
             value[i] = e
-            // console.log(value, '----')
             emit('picker:change', value)
         }
         return () => (

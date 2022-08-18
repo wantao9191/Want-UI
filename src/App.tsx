@@ -8,9 +8,6 @@ export const App = defineComponent({
         const aciton = () => {
             visible.value = !visible.value
         }
-        setTimeout(() => {
-            value.push('江苏')
-        }, 1000);
         const columns = reactive([[{ label: '江苏' }, { label: '安徽' }]])
         return () => (
             <div>
