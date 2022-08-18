@@ -3,39 +3,30 @@ import t from './App.module.scss'
 import { dialog } from '@/libs'
 export const App = defineComponent({
     setup(props, context) {
-        const visible = ref(false)
-        const visible1 = ref(false)
-        let value: any = reactive(['安徽','1'])
-        let value1: any = reactive([])
-        const aciton = () => {
-            visible.value = !visible.value
+        const value = ref('')
+        const slots = {
+            button:()=>{
+                return <want-button type='primary' size='mini'>发送</want-button>
+            }
         }
-        const aciton1 = () => {
-            visible1.value = !visible1.value
+        const slotIcon= {
+            rightIcon:()=>{
+                return <want-icon name='woman'></want-icon>
+            }
         }
-        const columns = [{
-            label: '江苏',
-        },
-        {
-            label: '安徽',
-        }, {
-            label: '浙江'
-        }, {
-            label: '广西'
-        }, {
-            label: '广州'
-        }, {
-            label: '云南'
-        }
-    ]
-
         return () => (
-            <div>
-                {columns[0].label}
-                <want-button block onClick={aciton}>选择</want-button>已选择:{value}
-                <want-button block onClick={aciton1}>时间选择器</want-button> 已选择:{value1}
-                <want-picker v-model:visible={visible.value} columns={columns} v-model:value={value} v-slots={{ title: () => { return '选择' } }}></want-picker>
-                <want-picker v-model:visible={visible1.value} mode='date-picker' v-model:value={value1} v-slots={{ title: () => { return '时间选择器' } }}></want-picker>
+            <div class={t.app}>
+                <want-input v-model:value={value.value} label='输入框' placeholder='请输入文字'></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='请输入文字' v-slots={slots}></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='禁用' disabled></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='只读' readonly></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='右对齐' align='right'></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='居中' align='center'></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='居中' clearable></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='icon' rightIcon='android'></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='slot方式展示icon' v-slots={slotIcon}></want-input>
+                <want-input v-model:value={value.value} label='输入框' placeholder='限制数量' maxlength='10' show-word-limit></want-input>
+
             </div>
         )
     }
