@@ -1,4 +1,4 @@
-import { computed, defineComponent, reactive, ref } from 'vue'
+import { computed, defineComponent, reactive, ref, withModifiers } from 'vue'
 import t from './App.module.scss'
 import { dialog } from '@/libs'
 export const App = defineComponent({
@@ -18,7 +18,7 @@ export const App = defineComponent({
         return () => (
             <div class={t.app}>
                 <want-swipe-action v-slots={slots}>
-                    <div class={t.item}>111111</div>
+                    <div class={t.item} >撒打算</div>
                 </want-swipe-action>
             </div>
         )

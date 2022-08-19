@@ -1,9 +1,10 @@
 .want-swipe-action {
     width: 100%;
     overflow-x: hidden;
-
+   
     .want-swipe-wrap {
         white-space: nowrap;
+        box-sizing: border-box;
         &.animation {
             transition: .2s all;
         }
@@ -14,9 +15,11 @@
         .want-swipe-action-main {
             width: 100%;
             display: inline-block;
+            vertical-align: bottom;
         }
 
         .want-swipe-right {
+            box-sizing: border-box;
             display: inline-block;
         }
     }
