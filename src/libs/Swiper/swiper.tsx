@@ -4,7 +4,7 @@ export const Swiper = defineComponent({
     props: {
         activeIndex: { type: Number, default: 0 },
         duration: { type: Number, default: 2000 },
-        autopaly: Boolean,
+        autoplay: Boolean,
         loop: Boolean,
         dotOutside:Boolean,
         indicator:{type:Boolean,default:true}
@@ -80,7 +80,7 @@ export const Swiper = defineComponent({
             touching.value = false
             setTimeout(() => {
                 animation.value = false
-                if (props.autopaly) {
+                if (props.autoplay) {
                     clearInterval(timer)
                     timer = null
                     initAuto()
@@ -88,7 +88,7 @@ export const Swiper = defineComponent({
             }, 200);
         }
         const initAuto = () => {
-            if (props.autopaly && !timer) {
+            if (props.autoplay && !timer) {
                 timer = setInterval(() => {
                     if (touching.value) {
                         clearInterval(timer)
