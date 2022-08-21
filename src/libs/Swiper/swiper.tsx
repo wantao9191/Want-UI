@@ -1,4 +1,4 @@
-import { computed, defineComponent, nextTick, onMounted, onUpdated, ref } from "vue";
+import { computed, defineComponent,  onMounted, onUpdated, ref } from "vue";
 import t from './swiper.module.scss'
 export const Swiper = defineComponent({
     props: {
@@ -16,9 +16,9 @@ export const Swiper = defineComponent({
         const page = ref(props.loop ? -props.activeIndex - 1 : -props.activeIndex)
         const moveX = ref(0)
         const touching = ref(false)
-        let startX = 0
+        let startX:number = 0
         let timer: any = null
-        const delay = 40
+        const delay:number = 40
         const wrapWidth = computed(() => {
             const width = swiperWrap.value?.clientWidth ?? 0
             return width
@@ -56,24 +56,19 @@ export const Swiper = defineComponent({
             resolveMoveEnd(index)
         }
         const resolveMoveEnd = (index: number) => {
+            page.value = index
             if (props.loop) {
                 if (Math.abs(index) > dots.value.length) {
-                    page.value = index
                     setTimeout(() => {
                         animation.value = false
                         page.value = index + dots.value.length
                     }, 200);
                 } else if (Math.abs(index) === 0) {
-                    page.value = index
                     setTimeout(() => {
                         animation.value = false
                         page.value = -dots.value.length
                     }, 200);
-                } else {
-                    page.value = index
                 }
-            } else {
-                page.value = index
             }
             moveX.value = page.value * wrapWidth.value
             emit('update:value', index)
@@ -95,9 +90,12 @@ export const Swiper = defineComponent({
                         return
                     }
                     animation.value = true
-                    if (page.value > -(dots.value.length - 1)) {
+                    if (page.value > -(dots.value.length )) {
                         resolveMoveEnd(page.value - 1)
-                    } else {
+                    } else if(props.loop) {
+                        animation.value = false
+                        resolveMoveEnd(-1)
+                    }else {
                         clearInterval(timer)
                         animation.value = false
                     }
