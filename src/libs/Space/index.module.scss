@@ -1,0 +1,8 @@
+.want-space {
+    display: flex;
+    flex-wrap: wrap;
+
+    &.want-space-vertical {
+        flex-direction: column;
+    }
+}

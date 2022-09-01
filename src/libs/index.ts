@@ -21,9 +21,11 @@ import { swiperItem } from "./Swiper/swiperItem";
 import { Picker } from "./Picker";
 import { Input } from "./Input";
 import { SwipeAction } from "./SwipeAction";
+import { Space } from "./Space";
 
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
+    Vue.component('want-space', Space)
     Vue.component('want-icon', Icon)
     Vue.component('want-button', Button)
     Vue.component('want-noticebar', Noticebar)

@@ -3,17 +3,16 @@ import t from './App.module.scss'
 import { dialog } from '@/libs'
 export const App = defineComponent({
     setup(props, context) {
-
         return () => (
             <div class={t.app}>
-                <want-swiper loop >
-                    <want-swiper-item style={{ height: '100vh', background: 'lightblue' }}>1</want-swiper-item>
-                    <want-swiper-item style={{ height: '100vh', background: 'lightgreen' }}>2</want-swiper-item>
-                    <want-swiper-item style={{ height: '100vh', background: 'lightyellow' }}>3</want-swiper-item>
-                    <want-swiper-item style={{ height: '100vh', background: 'lightpink' }}>4</want-swiper-item>
-                    <want-swiper-item style={{ height: '100vh', background: 'cyan' }}>5</want-swiper-item>
-                    <want-swiper-item style={{ height: '100vh', background: 'lightsalmon' }}>6</want-swiper-item>
-                </want-swiper>
+                <want-icon name='function'></want-icon>
+                <want-space justify=''>
+                    <want-button>space 间距1</want-button>
+                    <want-button>space 间距2</want-button>
+                    <want-button>space 间距3</want-button>
+                    <want-button>space 间距4</want-button>
+                    <want-button>space 间距5</want-button>
+                </want-space>
             </div>
         )
     }

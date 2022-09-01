@@ -1,12 +1,27 @@
 {
-  "name": "want-ui",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@wantao/want-ui",
+  "private": false,
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/Want-Ui.es.js",
+  "module": "./dist/Want-Ui.umd.js",
+  "exports": {
+    ".": {
+      "import": "./dist/Want-Ui.es.js",
+      "require": "./dist/Want-Ui.umd.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "vue": "^3.2.37"
