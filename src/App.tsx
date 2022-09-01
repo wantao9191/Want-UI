@@ -7,7 +7,7 @@ export const App = defineComponent({
             <div class={t.app}>
                 <want-icon name='function'></want-icon>
                 <want-space justify=''>
-                    <want-button>space 间距1</want-button>
+                    <want-button loading type='danger' fill=''>space 间距1</want-button>
                     <want-button>space 间距2</want-button>
                     <want-button>space 间距3</want-button>
                     <want-button>space 间距4</want-button>
