@@ -7,12 +7,20 @@
     border: 0;
     background: #fff;
     padding: $middle;
+    border: 1px solid #ddd;
+    color: #333;
+    &.fill-none {
+        border: 0;
+        background: none;
+    }
     &.round-button {
         border-radius: 24px;
     }
-    &.square-button{
+
+    &.square-button {
         border-radius: 0;
     }
+
     &.disabled-button,
     &.loading-button {
         opacity: .6;
@@ -30,7 +38,7 @@
         color: #333;
 
         &.fill-none {
-            border: none;
+            border: 0;
         }
 
         >.loadingIndicator {
@@ -40,16 +48,18 @@
 
     &.want-primary-button {
         background-color: $primary;
+        border: 1px solid $primary;
+        color: #fff;
 
         &.fill-outline {
             background: none;
-            border: 1px solid $primary;
             color: $primary;
         }
 
         &.fill-none {
             background: none;
             color: $primary;
+            border: 0;
 
             >.loadingIndicator {
                 border-color: $primary $primary $primary transparent;
@@ -59,16 +69,18 @@
 
     &.want-success-button {
         background-color: $success;
+        color: #fff;
+        border: 1px solid $success;
 
         &.fill-outline {
             background: none;
-            border: 1px solid $success;
             color: $success;
         }
 
         &.fill-none {
             background: none;
             color: $success;
+            border: 0;
 
             >.loadingIndicator {
                 border-color: $success $success $success transparent;
@@ -78,16 +90,19 @@
 
     &.want-warning-button {
         background-color: $warning;
+        border: 1px solid $warning;
+        color: #fff;
+        border: 1px solid $warning;
 
         &.fill-outline {
             background: none;
-            border: 1px solid $warning;
             color: $warning;
         }
 
         &.fill-none {
             background: none;
             color: $warning;
+            border: 0;
 
             >.loadingIndicator {
                 border-color: $warning $warning $warning transparent;
@@ -97,22 +112,26 @@
 
     &.want-danger-button {
         background-color: $danger;
+        border: 1px solid $danger;
+        color: #fff;
 
         &.fill-outline {
             background: none;
-            border: 1px solid $danger;
             color: $danger;
         }
 
         &.fill-none {
             background: none;
             color: $danger;
+            border: 0;
 
             >.loadingIndicator {
                 border-color: $danger $danger $danger transparent;
             }
         }
     }
+
+
 
     &.mini {
         padding: $mini;
