@@ -25,7 +25,6 @@ import { Space } from "./Space";
 
 export { Toast, actionSheet, dialog }
 function install(Vue: any) {
-    Vue.component('want-space', Space)
     Vue.component('want-icon', Icon)
     Vue.component('want-button', Button)
     Vue.component('want-noticebar', Noticebar)
@@ -46,5 +45,6 @@ function install(Vue: any) {
     Vue.component('want-picker', Picker)
     Vue.component('want-input', Input)
     Vue.component('want-swipe-action', SwipeAction)
+    Vue.component('want-space', Space)
 }
 export default { install }

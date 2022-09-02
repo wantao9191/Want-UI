@@ -37,7 +37,7 @@ export const Tabs = defineComponent({
             const contentWidth = labelWrap.value.parentElement?.clientWidth ?? 0
             const index = labels.value.findIndex((v: any) => { return v.name === props.value })
             const item = labels.value[index + 1] ?? labels.value[index]
-            const right = item.rect.right ?? 0
+            const right = item.rect.activeOffset+item.rect.width ?? 0
             return right > contentWidth ? contentWidth - right : 0
         })
         const done = (prop: any) => {
