@@ -22,7 +22,6 @@ export const Tabs = defineComponent({
                 const rect = nodes[i]?.getBoundingClientRect() ?? {}
                 rect.activeWidth = nodes[i]?.querySelector('.label').offsetWidth
                 rect.activeOffset = nodes[i]?.querySelector('.label').offsetLeft
-                console.log({ ...l.props, label: l.children.label?.() ?? l.props.label, rect })
                 return { ...l.props, label: l.children.label?.() ?? l.props.label, rect }
             })
         })
