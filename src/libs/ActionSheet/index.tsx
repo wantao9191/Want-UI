@@ -5,7 +5,7 @@ export const ActionSheet = defineComponent({
         actions: { type: Array, default: [] },
         propOptions: { type: Object, default: { label: 'label', value: 'value' } },
         cancelText: { type: String, default: '取消' },
-        showCancel: { type: Boolean, default: true },
+        showCancel: { type: Boolean, default: false },
         closeOnMaskClick: { tpye: Boolean, default: true },
         visible: Boolean,
         title: String,
@@ -14,7 +14,7 @@ export const ActionSheet = defineComponent({
     emits: ['action', 'update:visible', 'close'],
     setup(props, { slots, emit }) {
         const close = ({ prop, action }: { prop?: any, action: string }) => {
-            if(!props.closeOnMaskClick&& action === 'close')return
+            if (!props.closeOnMaskClick && action === 'close') return
             if (props.beforeClose) {
                 props.beforeClose(action, prop, () => {
                     emit('update:visible', false)
