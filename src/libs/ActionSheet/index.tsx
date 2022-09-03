@@ -33,7 +33,7 @@ export const ActionSheet = defineComponent({
         return () => (
             <>{props.visible ? <div class={t['want-action-sheet']} onClick={() => { close({ action: 'close' }) }}>
                 <div class={[t['want-sheet-wrap'], t.enter]} onClick={withModifiers(() => { }, ['stop'])}>
-                    <header class={slots.title ? t.header : ''}>{slots.title?.() ?? <div class={t.header}>{props.title}</div>}</header>
+                    <header class={slots.title ? t.header : ''}>{slots.title?.() ?? <div class={props.title ? t.header : ''}>{props.title}</div>}</header>
                     <main>
                         {props.actions.map((a: any) => {
                             return <div class={
