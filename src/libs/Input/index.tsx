@@ -32,7 +32,7 @@ export const Input = defineComponent({
         return () => (
             <div class={[t['want-input'], t[`want-input-align-${props.align}`], props.disabled ? t['want-disabled-input'] : '']}>
                 <div class={t['want-input-wrap']}>
-                    <span class={t['want-input-label']}>{slots.label?.() ?? props.label}</span>
+                    {/* <span class={t['want-input-label']}>{slots.label?.() ?? props.label}</span> */}
                     <input
                         value={value.value}
                         onInput={update}

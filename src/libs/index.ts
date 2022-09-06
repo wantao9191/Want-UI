@@ -18,7 +18,7 @@ import { RadioGroup } from "./Radio/radioGroup";
 import { Modal } from "./Modal";
 import { Swiper } from "./Swiper/swiper";
 import { swiperItem } from "./Swiper/swiperItem";
-import { Picker } from "./Picker";
+import { Picker } from "./Picker/index";
 import { Input } from "./Input";
 import { SwipeAction } from "./SwipeAction";
 import { Space } from "./Space";

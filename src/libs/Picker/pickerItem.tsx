@@ -36,10 +36,10 @@ export const PickerItem = defineComponent({
         }
         const touchmove = (e: TouchEvent) => {
             moveY.value = e.touches[0].pageY - startY + transY
-            if (moveY.value > selectBoxTrans.value) {
+            if (moveY.value < selectBoxTrans.value - (props.columns.length - 1) * 40) {
+                moveY.value = selectBoxTrans.value - (props.columns.length - 1) * 40
+            } else if (moveY.value > selectBoxTrans.value) {
                 moveY.value = selectBoxTrans.value
-            } else if (Math.abs(moveY.value) > (props.columns.length) * 40 - selectBoxTrans.value) {
-                moveY.value = -((props.columns.length - 1) * 40 - selectBoxTrans.value)
             }
         }
         const touchend = (e: TouchEvent) => {
