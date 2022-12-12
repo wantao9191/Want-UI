@@ -4,9 +4,11 @@ type props = {
     text: string
     duration: number
     mask: boolean
-    instance: any
+    instance: any,
+    top: string,
+    align: string
 }
-export const Toast = function ({ text, duration, mask, instance }: props) {
+export const Toast = function ({ text, duration, mask, align, top, instance }: props) {
     const dom = document.createElement('div')
     const remove = () => {
         dom.remove()
@@ -18,7 +20,7 @@ export const Toast = function ({ text, duration, mask, instance }: props) {
             if (duration) {
                 setTimeout(remove, duration);
             }
-            return h(toast, { text })
+            return h(toast, { text, mask, align, top })
         }
     })
     return {

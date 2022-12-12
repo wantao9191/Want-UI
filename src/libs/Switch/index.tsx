@@ -22,7 +22,6 @@ export const Switch = defineComponent({
                 <span></span>
             </button>
             {props.activeText ? <span class={[t[props.size], t[props.type], t['switch-text']]}>{props.inactiveText}</span> : ''}
-
         </span >)
     }
 })
