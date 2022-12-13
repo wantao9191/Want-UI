@@ -12,7 +12,7 @@ export const Collapse = defineComponent({
                 emit('update:value', name)
             } else {
                 const index = props.value.indexOf(name)
-                const arr = props.value
+                const arr:any = props.value
                 index > -1 ? arr.splice(index, 1) : arr.push(name)
                 emit('update:value', arr)
             }

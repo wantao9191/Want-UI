@@ -46,7 +46,7 @@ export const SwipeAction = defineComponent({
                 moveY.value = -left.value.clientWidth
                 animation.value = false
             }
-            if(!moving){
+            if (!moving) {
                 moveY.value = -left.value.clientWidth
             }
             moving = false

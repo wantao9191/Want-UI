@@ -16,7 +16,6 @@ export const CollapsePane = defineComponent({
             if (props.disabled) return
             updateValue?.(props.name)
         }
-        console.log(props.disabled)
         return () => (<div class={[t['want-collapse-pane'], props.disabled ? t['want-collapse-disabled-pane'] : '']}>
             <header onClick={click}>
                 <span class={t['header-content']}>{slots.title?.() ?? props.title}</span>
