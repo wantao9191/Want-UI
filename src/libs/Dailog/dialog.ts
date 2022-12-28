@@ -15,12 +15,12 @@ const createDialog = ({ ...args }: prop) => {
     const dom = document.createElement('div')
     const app = () => createApp({
         render() {
-            return h(Dialog, { ...args, onConfirm: args.confirm, onCancel: args.cancel,onClose:()=>{args.cancel({},'close')} })
+            return h(Dialog, { ...args, onConfirm: args.confirm, onCancel: args.cancel,visible:true, onClose: () => { args.cancel({}, 'close') } })
         }
     })
     return { dom, app }
 }
-const initDialog = ({ ...args }: prop,type:string='confirm')=>{
+const initDialog = ({ ...args }: prop, type: string = 'confirm') => {
     return new Promise((resolve: any, reject: any) => {
         const confirm = (instance: any) => {
             if (args.beforeClose) {
@@ -38,7 +38,7 @@ const initDialog = ({ ...args }: prop,type:string='confirm')=>{
             remove()
             reject()
         }
-        const { dom, app } = createDialog({ ...args, showCancel:type === 'confirm', confirm, cancel })
+        const { dom, app } = createDialog({ ...args, showCancel: type === 'confirm', confirm, cancel })
         const instance = app()
         instance.mount(dom)
         document.body.append(dom)
@@ -53,6 +53,6 @@ export const dialog = {
         return initDialog(args)
     },
     alert: ({ ...args }: prop) => {
-        return initDialog(args,'alert')
+        return initDialog(args, 'alert')
     },
 }

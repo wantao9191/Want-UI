@@ -1,4 +1,4 @@
-import { defineComponent, reactive,withModifiers } from 'vue'
+import { defineComponent, reactive, Transition, withModifiers } from 'vue'
 import t from './index.module.scss'
 import { Button } from '../Button'
 export const Dialog = defineComponent({
@@ -12,9 +12,11 @@ export const Dialog = defineComponent({
         content: String,
         showCancel: Boolean,
         beforeClose: Function,
-        closeOnMaskClick:Boolean
+        closeOnMaskClick: Boolean,
+        visible: Boolean
     },
     components: { wantButton: Button },
+    emits: ['cancel', 'confirm', 'close'],
     setup(props, { emit }) {
         const instance = reactive({ confirmButtonLoading: false, cancelButtonLoading: false })
         const cancel = () => {
@@ -27,29 +29,32 @@ export const Dialog = defineComponent({
             emit('close')
         }
         return () => (
-            <div class={t['want-dialog']} onClick={close}>
-                <div class={t['want-dialog-wrap']} onClick={withModifiers(()=>{},['stop'])}>
-                    <main v-html={props.content}></main>
-                    <footer>
-                        <want-button fill='none'
-                            class={t['want-dialog-button']}
-                            block size='large'
-                            v-show={props.showCancel}
-                            type={props.cancelButtonType}
-                            onClick={cancel}
-                            loading={instance.cancelButtonLoading}
-                        >{props.cancelButtonText}</want-button>
-                        <want-button
-                            class={t['want-dialog-button']}
-                            block
-                            size='large'
-                            fill='none'
-                            onClick={confirm}
-                            loading={instance.confirmButtonLoading}
-                            type={props.confirmButtonType}
-                        >{props.confirmButtonText}</want-button>
-                    </footer>
-                </div>
+            <div>
+                <Transition name='want-dialog' appear>
+                    {props.visible ? <div class={t['want-dialog-wrap']} onClick={withModifiers(() => { }, ['stop'])}>
+                        <main v-html={props.content}></main>
+                        <footer>
+                            <want-button fill='none'
+                                class={t['want-dialog-button']}
+                                block size='large'
+                                v-show={props.showCancel}
+                                type={props.cancelButtonType}
+                                onClick={cancel}
+                                loading={instance.cancelButtonLoading}
+                            >{props.cancelButtonText}</want-button>
+                            <want-button
+                                class={t['want-dialog-button']}
+                                block
+                                size='large'
+                                fill='none'
+                                onClick={confirm}
+                                loading={instance.confirmButtonLoading}
+                                type={props.confirmButtonType}
+                            >{props.confirmButtonText}</want-button>
+                        </footer>
+                    </div> : ''}
+                </Transition>
+                {props.visible ? <div class={t['want-dialog']} onClick={close}></div> : ''}
             </div>
         )
     }

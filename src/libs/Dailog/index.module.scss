@@ -7,31 +7,37 @@
     z-index: 2000;
     background: rgba(0, 0, 0, .45);
 
-    .want-dialog-wrap {
-        position: absolute;
-        width: 80vw;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        background: #fff;
-        border-radius: $radius;
 
-        main {
-            padding:24px 12px;
-            font-size: 14px;
-        }
+}
 
-        footer {
-            display: flex;
-            justify-content: center;
-            border-top: 1px solid #ddd;
-            .want-dialog-button {
-                flex: 1;
-                text-align: center;
-                &:first-child{
-                    border-right: 1px solid #ddd;
-                }
+.want-dialog-wrap {
+    position: absolute;
+    width: 80vw;
+    top: 50%;
+    left: 50%;
+    margin-left: -40vw;
+    margin-top: -25%;
+    text-align: center;
+    background: #fff;
+    border-radius: $radius;
+    z-index: 2001;
+
+    main {
+        padding: 24px 12px;
+        font-size: 14px;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid #ddd;
+
+        .want-dialog-button {
+            flex: 1;
+            text-align: center;
+
+            &:first-child {
+                border-right: 1px solid #ddd;
             }
         }
     }
