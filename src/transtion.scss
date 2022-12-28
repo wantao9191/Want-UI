@@ -1,0 +1,13 @@
+.want-action-sheet-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.want-action-sheet-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.want-action-sheet-enter-from,
+.want-action-sheet-leave-to {
+    transform: translateY(100%);
+    opacity: 0;
+}
