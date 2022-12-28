@@ -1,3 +1,4 @@
+import '../style.scss'
 import { Toast } from "./toast";
 import { Icon } from "./Icon/index";
 import { Button } from "./Button/index.jsx";

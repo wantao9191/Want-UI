@@ -62,7 +62,8 @@ export const PickerItem = defineComponent({
             <div class={t['want-picker-scroll']} ref={$main}
                 onTouchstart={touchstart}
                 onTouchmove={touchmove}
-                onTouchend={touchend}>
+                onTouchend={touchend}
+                >
                 <ul style={{ transform: `translateY(${touching.value ? moveY.value : transMove.value}px)` }}>
                     {props.columns.map((y: any, i: number) => {
                         return <li class={props.value == y.label ? t['active'] : ''} key={i} onClick={() => { labelClick(y.label) }}>{y.label}</li>

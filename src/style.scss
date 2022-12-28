@@ -44,4 +44,38 @@ body {
     // 答案见 https://github.com/zenozeng/fonts.css/
     font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
 }
+.want-action-sheet-enter-active {
+    transition: all 0.3s ease-out;
+}
 
+.want-action-sheet-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.want-action-sheet-enter-from,
+.want-action-sheet-leave-to {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.want-scale-enter-active {
+    animation: bounce-in 0.5s;
+}
+
+.want-scale-leave-active {
+    animation: bounce-in 0.5s reverse;
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

@@ -30,7 +30,7 @@ export const Dialog = defineComponent({
         }
         return () => (
             <div>
-                <Transition name='want-dialog' appear>
+                <Transition name='want-scale' appear>
                     {props.visible ? <div class={t['want-dialog-wrap']} onClick={withModifiers(() => { }, ['stop'])}>
                         <main v-html={props.content}></main>
                         <footer>

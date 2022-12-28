@@ -4,6 +4,7 @@
     height: 100%;
     overflow: hidden;
     position: relative;
+    user-select: none;
     ul {
         transition: all .1s;
 

@@ -1,4 +1,4 @@
-import { defineComponent, withModifiers } from "vue";
+import { defineComponent, Transition, withModifiers } from "vue";
 import t from './index.module.scss'
 export const Modal = defineComponent({
     props: {
@@ -11,14 +11,19 @@ export const Modal = defineComponent({
         const click = () => {
             if (props.closeOnMaskClick) emit('update:visible', false)
         }
-        return () => (<>
-            {props.visible ? <div class={t['want-modal']} onClick={click}>
-                <div class={[t['want-modal-wrap'], t[`want-modal-${props.align}`]]} onClick={withModifiers(() => { }, ['stop'])}>
-                    <header>{slots.title?.() ?? props.title}</header>
-                    <main>{slots.default?.()}</main>
-                    {slots.footer ? <footer>{slots.footer()}</footer> : ''}
-                </div>
-            </div> : ''}
-        </>)
+        return () => (
+            <>
+                <Transition name='want-scale' appear>
+                    {props.visible ? <div class={[t['want-modal-wrap'], t[`want-modal-${props.align}`]]} onClick={withModifiers(() => { }, ['stop'])}>
+                        <header>{slots.title?.() ?? props.title}</header>
+                        <main>{slots.default?.()}</main>
+                        {slots.footer ? <footer>{slots.footer()}</footer> : ''}
+                    </div> : ''}
+
+                </Transition>
+                {props.visible ? <div class={t['want-modal']} onClick={click}></div> : ''
+                }
+            </>
+        )
     }
 })
