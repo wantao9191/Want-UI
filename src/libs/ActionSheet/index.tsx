@@ -35,7 +35,7 @@ export const ActionSheet = defineComponent({
                 <div class={t['want-action-sheet']} v-show={props.visible} onClick={() => { close({ action: 'close' }) }}></div>
                 <Transition name='want-action-sheet'>
                     {props.visible ?
-                        <div class={[t['want-sheet-wrap'], t.enter]} onClick={withModifiers(() => { }, ['stop'])}>
+                        <div class={[t['want-sheet-wrap']]} onClick={withModifiers(() => { }, ['stop'])}>
                             <header class={slots.title ? t.header : ''}>{slots.title?.() ?? <div class={props.title ? t.header : ''}>{props.title}</div>}</header>
                             <main>
                                 {props.actions.map((a: any) => {
@@ -49,7 +49,6 @@ export const ActionSheet = defineComponent({
                             <footer v-show={props.showCancel} onClick={() => { close({ action: 'cancel' }) }}>
                                 {props.cancelText}
                             </footer>
-
                         </div> : ''}
                 </Transition>
             </>

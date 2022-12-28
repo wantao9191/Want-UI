@@ -6,14 +6,15 @@ import t from './App.module.scss'
 // interface valueArray { [index: number]: string | number }
 export const App = defineComponent({
     setup(props, context) {
-        const visible = ref(false)
-        const click = ()=>{
-            visible.value = true
-        }
+        const states = reactive({ active: [] })
         return () => (
             <div class={t.app}>
-                <want-button block onClick={click}>show</want-button>
-                <want-sheet-action title='action-sheet' v-model:visible={visible.value} actions={[{ label: '选项一', value: 1 }]}></want-sheet-action>
+                <want-collapse v-model:value={states.active}>
+                    <want-collapse-pane title='第一项' name='1'>第一项内容</want-collapse-pane>
+                    <want-collapse-pane title='第二项' name='2'>第二项内容</want-collapse-pane>
+                    <want-collapse-pane title='第三项' name='3'>第三项内容</want-collapse-pane>
+                    <want-collapse-pane title='第四项' name='4'>第四项内容</want-collapse-pane>
+                </want-collapse>
             </div>
         )
     }
